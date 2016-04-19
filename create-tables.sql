@@ -23,7 +23,7 @@ create table login(
 -- Define the questions table
 create table questions( 
     id int not null auto_increment primary key,
-    timestamp date, 
+    ts timestamp, 
     question text not null, 
     answer text, 
     status enum("not-started", "in-progress", "completed")
