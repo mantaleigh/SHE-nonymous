@@ -16,51 +16,64 @@ import dbconn2
 
 USER = 'svoigt'
 
-		
-# Select string looks like this: 
-'''
-<div>
-	<p>Question: {question}
-	<p>Status: {status}
-	<p>Time submitted: {ts}
-	-- if there is a partial answer:
-	<p>In-Progress Answer: {curr_answer}
-	<input type="submit" name={id} value="Select Question">
-</div>
-'''
-
 
 def makeQuestionSelect(database): 
 	conn = dbConnect(database)
 	curs = conn.cursor(MySQLdb.cursors.DictCursor) # results as Dictionaries
-	statement = "select * from questions where status='not-started' or status='in-progress';"
+	statement = "SELECT * FROM questions WHERE status='not-started' OR status='in-progress' ORDER BY ts DESC;"
 	curs.execute(statement)
 	lines = []
 	while True:
 		row = curs.fetchone()
 		if row == None: 
+			lines.append("<input type='submit' name=questionSubmit value='Answer Selected Question'>")
 			return "\n".join(lines)
 		
-		lines.append("<div>\n<p>Question: {question}\n<p>Status: {status}\n<p>Time submitted: {ts}".format(question=row['question'], status=row['status'], ts=row['ts']))
+		lines.append("<div style='border:2px solid black;'><input type='radio' name='q_selection' value={id}> Question: {question}\n<p>Status: {status}\n<p>Time submitted: {ts}".format(id=row['id'], question=row['question'], status=row['status'], ts=row['ts']))
 		if row['status'] == 'in-progress': 
 			lines.append("<p>In-Progress Answer: {curr_answer}".format(curr_answer=row['answer']))
-		lines.append("<input type='submit' name={id} value='Select Question'>".format(id=row['id']))		
+		lines.append("</div>")
+
+def makeAnswerForm(database, id): 
+	conn = dbConnect(database)
+	curs = conn.cursor(MySQLdb.cursors.DictCursor)
+	statement = "SELECT * FROM questions WHERE id=" + id # came from the form, not user input
+	curs.execute(statement)
+	row = curs.fetchone()
+	if row: # only one result
+		s = "<p>Question: {q}<br><br>".format(q=row['question'])
+		s += "DO NOT CHANGE: <input type=text name='id' value={id}>".format(id=row['id'])
+		s += "<label for='answer'>Answer:</label><br>"
+		if row['status'] == 'in-progress': 
+			s += "<textarea name='answer' cols='40' rows='5'>{ans}</textarea><br>".format(ans=row['answer'])
+		else: 
+			s += "<textarea name='answer' cols='40' rows='5'></textarea><br>"
+		s += "<input type='submit' name='save' value='Save'><input type='submit' name='publish' value='Publish'>"
+		return s
+	else: 
+		return "ERROR: couldn't find selected question in the database" # shouldn't happen
 
 
-
-def answerQuestion(database, q_id): 
+def updateAnswer(database, q_id, answer, update_type): 
 	'''
 	Adds the provided question to the questions table in the given database. 
 	'''
+	conn = dbConnect(database)
+	curs = conn.cursor(MySQLdb.cursors.DictCursor)
+	statement = "SELECT * FROM questions WHERE id=" + q_id # won't come from the user
+	curs.execute(statement)
+	row = curs.fetchone() # only one result
+	timestamp = row['ts']
+	# timestamp automatically changes on update - so you have to replace it with the old value
 
-	print "not implemented yet"
+	if update_type == 'publish':
+		statement = "update questions set status='completed', answer=%s, ts=%s where id=%s"
+		# change the status to completed
+	if update_type == 'save': 
+		statement = "update questions set status='in-progress', answer=%s, ts=%s where id=%s"
+		# change the status to in-progress
 
-	# conn = dbConnect(database)
-	# curs = conn.cursor(MySQLdb.cursors.DictCursor) # results as Dictionaries
-	# statement = "insert into questions (question, status) values (%s, 'not-started');"
-	# curs.execute(statement, question)
-	# print "added question: " + question # is this an XSS vulnerability?
-
+	curs.execute(statement, (answer, timestamp, q_id))
 
 
 def dbConnect(database): 
@@ -72,7 +85,3 @@ def dbConnect(database):
 	conn = dbconn2.connect(dsn)
 	return conn
 
-
-# # if the script is run as a script, start here
-# if __name__ == '__main__':
-#     addQuestion()

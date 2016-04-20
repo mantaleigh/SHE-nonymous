@@ -23,7 +23,7 @@ def getQuestions(database):
 	'''
 	conn = dbConnect(database)
 	curs = conn.cursor(MySQLdb.cursors.DictCursor) # results as Dictionaries
-	statement = "select id, ts, question from questions;"
+	statement = "SELECT * FROM questions WHERE status='completed' ORDER BY ts DESC;"
 	curs.execute(statement)
 	lines = []
 	lines.append("<ul>")
@@ -32,7 +32,7 @@ def getQuestions(database):
 		if row == None: 
 			lines.append("</ul>")
 			return "\n".join(lines)
-		lines.append("<li>ID: {id}, TIMESTAMP: {ts}, QUESTION: {question}".format(**row))
+		lines.append("<li>ID: {id}, TIMESTAMP: {ts} <br>QUESTION: {question}<br>Answer: {ans}".format(id=row['id'], ts=row['ts'], question=row['question'], ans=row['answer']))
 
 
 
@@ -45,10 +45,3 @@ def dbConnect(database):
 	conn = dbconn2.connect(dsn)
 	return conn
 
-
-
-
-
-# # if the script is run as a script, start here
-# if __name__ == '__main__':
-#     getQuestions(DATABASE)

@@ -20,7 +20,7 @@ def addQuestion(database, question):
 	'''
 	conn = dbConnect(database)
 	curs = conn.cursor(MySQLdb.cursors.DictCursor) # results as Dictionaries
-	statement = "insert into questions (question, status) values (%s, 'not-started');"
+	statement = "INSERT INTO questions (question, status) VALUES (%s, 'not-started');"
 	curs.execute(statement, question)
 	print "added question: " + question # is this an XSS vulnerability?
 
@@ -35,10 +35,3 @@ def dbConnect(database):
 	conn = dbconn2.connect(dsn)
 	return conn
 
-
-
-
-
-# # if the script is run as a script, start here
-# if __name__ == '__main__':
-#     addQuestion()
