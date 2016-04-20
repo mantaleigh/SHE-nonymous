@@ -1,0 +1,28 @@
+<!-- 
+    Author: Samantha Voigt
+    Last Modified: 4/19/16
+-->
+
+<!doctype html>
+<HTML lang="en">
+<head>
+    <meta charset="utf8">
+    <title>SHE-nonymous - Answer</title>
+</head>
+<body>
+
+	<h1>SHE-nonymous - Answer</h1>
+
+	<form method=post action="answerQuestions.cgi">
+		{questionSelect}
+		<br>
+		<label for="answer">Answer:</label>
+		<br>
+		<textarea name="answer" cols="40" rows="5"></textarea>
+		<br>
+		<input type='submit' name='save' value='Save'>
+		<input type='submit' name='publish' value='Publish'>
+	</form>
+
+</body>
+</html>
