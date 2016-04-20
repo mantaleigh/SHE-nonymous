@@ -32,7 +32,7 @@ def getQuestions(database):
 		if row == None: 
 			lines.append("</ul>")
 			return "\n".join(lines)
-		lines.append("<li>ID: {id}, TIMESTAMP: {ts} <br>QUESTION: {question}<br>Answer: {ans}".format(id=row['id'], ts=row['ts'], question=row['question'], ans=row['answer']))
+		lines.append("<li>ID: {id}, TIMESTAMP: {ts} <br>QUESTION: {question}<br><br>ANSWER: {ans}".format(id=row['id'], ts=row['ts'], question=row['question'], ans=row['answer']))
 
 
 

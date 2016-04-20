@@ -7,7 +7,9 @@ answerQuestions.py
 
 TODO: Write a description of the file
 
-TODO: sort by timestamp
+TODO: Color in-progress and not-started questions differently
+TODO: Count number of unanswered questions and display
+
 
 '''
 
@@ -60,12 +62,11 @@ def updateAnswer(database, q_id, answer, update_type):
 	'''
 	conn = dbConnect(database)
 	curs = conn.cursor(MySQLdb.cursors.DictCursor)
-	statement = "SELECT * FROM questions WHERE id=" + q_id # won't come from the user
-	curs.execute(statement)
+	statement = "SELECT * FROM questions WHERE id=%s"
+	curs.execute(statement, q_id)
 	row = curs.fetchone() # only one result
 	timestamp = row['ts']
 	# timestamp automatically changes on update - so you have to replace it with the old value
-
 	if update_type == 'publish':
 		statement = "update questions set status='completed', answer=%s, ts=%s where id=%s"
 		# change the status to completed
