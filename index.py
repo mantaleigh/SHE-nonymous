@@ -18,8 +18,6 @@ def getQuestions(database):
 	'''
 	Returns a list (ul) string of all of the questions in the questions table of the database
 
-	TODO: Select only those questions that have an answer
-
 	'''
 	conn = dbConnect(database)
 	curs = conn.cursor(MySQLdb.cursors.DictCursor) # results as Dictionaries

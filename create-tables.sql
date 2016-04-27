@@ -17,7 +17,7 @@ drop table if exists optional_questions;
 
 create table login(
     login_id varchar(50) not null primary key, 
-    passhash char(32) -- for sha256 hash
+    passhash char(40) -- for sha1 hash
  );
 
 -- Define the questions table

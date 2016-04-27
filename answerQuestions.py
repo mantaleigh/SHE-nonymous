@@ -44,7 +44,7 @@ def makeAnswerForm(database, id):
 	row = curs.fetchone()
 	if row: # only one result
 		s = "<p>Question: {q}<br><br>".format(q=row['question'])
-		s += "DO NOT CHANGE: <input type=text name='id' value={id}>".format(id=row['id'])
+		s += "<input type=text name='id' value={id} style='display:none'>".format(id=row['id'])
 		s += "<label for='answer'>Answer:</label><br>"
 		if row['status'] == 'in-progress': 
 			s += "<textarea name='answer' cols='40' rows='5'>{ans}</textarea><br>".format(ans=row['answer'])

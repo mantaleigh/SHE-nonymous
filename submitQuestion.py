@@ -25,7 +25,6 @@ def addQuestion(database, question):
 	print "added question: " + question # is this an XSS vulnerability?
 
 
-
 def dbConnect(database): 
 	''' 
 	Connects to the provided database using my cnf file and returns the connection
