@@ -11,6 +11,16 @@ body {
 }
 
 
-#content { 
-	
+.timestamp { 
+	font-style: italic;
+}
+
+
+.question { 
+	font-weight: bold;
+	font-size: 120%;
+}
+
+.timestamp { 
+	font-size: 75%;
 }

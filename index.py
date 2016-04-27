@@ -21,16 +21,16 @@ def getQuestions(database):
 	'''
 	conn = dbConnect(database)
 	curs = conn.cursor(MySQLdb.cursors.DictCursor) # results as Dictionaries
-	statement = "SELECT * FROM questions WHERE status='completed' ORDER BY ts DESC;"
+	statement = "SELECT DATE_FORMAT(ts, '%W %M %w, %Y') as ts, question, answer FROM questions WHERE status='completed' ORDER BY ts DESC;"
 	curs.execute(statement)
 	lines = []
-	lines.append("<ul>")
+	lines.append("<ul class='list-group'>")
 	while True:
 		row = curs.fetchone()
 		if row == None: 
 			lines.append("</ul>")
 			return "\n".join(lines)
-		lines.append("<li>ID: {id}, TIMESTAMP: {ts} <br>QUESTION: {question}<br><br>ANSWER: {ans}".format(id=row['id'], ts=row['ts'], question=row['question'], ans=row['answer']))
+		lines.append("<li class='list-group-item'><span class='question'>{question}</span><br><br><span class='answer'>{ans}</span><br><br><span class='timestamp'>Asked on: {ts}</span>".format(ts=row['ts'], question=row['question'], ans=row['answer']))
 
 
 
