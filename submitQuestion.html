@@ -7,6 +7,13 @@
 <HTML lang="en">
 <head>
     <meta charset="utf8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="An anonymous question-asking resource for the Wellesley College SHEs.">
+    <meta name="author" content="Samantha Voigt">
+    <!-- <link rel="icon" href=""> -->
+
     <title>SHE-nonymous - Submit</title>
 
 	<!-- Latest compiled and minified CSS -->
@@ -15,27 +22,51 @@
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    
+	<link rel="stylesheet" href="colorscheme.css">
+	<link rel="stylesheet" href="styling.css">
+
 </head>
 <body>
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.cgi">SHE-nonymous</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="index.cgi">Home</a></li>
+            <li class="active"><a href="submitQuestion.cgi">Submit Question</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="answerQuestions.cgi">SHEs Only</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
 
-	<h1>SHE-nonymous - Submit</h1>
-
-	<div id="nav">
-		<a href="index.cgi">Home</a>
-		<a href="submitQuestion.cgi">Submit</a>
-		<a href="answerQuestions.cgi">For SHEs only</a>
+    <div class="container" id="content"> 
+		<form method=post action="submitQuestion.cgi">
+			<label for="question">Your Question:</label>
+			<br>
+			<textarea name="question" cols="40" rows="5"></textarea>
+			<br>
+			<input type='submit' name='submit' value='Submit'>
+		</form>
 	</div>
 
-	<form method=post action="submitQuestion.cgi">
-		<label for="question">Your Question:</label>
-		<br>
-		<textarea name="question" cols="40" rows="5"></textarea>
-		<br>
-		<input type='submit' name='submit' value='Submit'>
-	</form>
+
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 </body>
 </html>
