@@ -45,7 +45,7 @@
             <li class="active"><a href="submitQuestion.cgi">Submit Question</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="answerQuestions.cgi">SHEs Only</a></li>
+            <li><a href="answerQuestions.cgi">SHE Login</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -55,12 +55,13 @@
     	<h1>Submit a Question</h1>
     	<p>Some words will go here about what we want to say when a person is going to ask a question
 
+
 		<form method=post action="submitQuestion.cgi">
-			<label for="question">Your Question:</label>
-			<br>
-			<textarea name="question" cols="40" rows="5"></textarea>
-			<br>
-			<input type='submit' name='submit' value='Submit'>
+			<fieldset class="form-group">
+				<label for="question">Your Question:</label>
+				<textarea class="form-control" name="question" rows="10"></textarea>
+			</fieldset>
+			  <input type="submit" class="btn btn-primary" name="submit" value="submit">
 		</form>
 	</div>
 

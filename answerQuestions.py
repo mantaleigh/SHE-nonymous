@@ -25,13 +25,19 @@ def makeQuestionSelect(database):
 	statement = "SELECT * FROM questions WHERE status='not-started' OR status='in-progress' ORDER BY ts DESC;"
 	curs.execute(statement)
 	lines = []
+	lines.append("<fieldset class='form-group'>")
+	count = 0
 	while True:
 		row = curs.fetchone()
 		if row == None: 
-			lines.append("<input type='submit' name=questionSubmit value='Answer Selected Question'>")
-			return "\n".join(lines)
-		
-		lines.append("<div style='border:2px solid black;'><input type='radio' name='q_selection' value={id}> Question: {question}\n<p>Status: {status}\n<p>Time submitted: {ts}".format(id=row['id'], question=row['question'], status=row['status'], ts=row['ts']))
+			if count > 0: # there were questions to answer
+				lines.append("</fieldset>")
+				lines.append("<input type='submit' class='btn btn-primary' name=questionSubmit value='Answer Selected Question'>")
+				return "\n".join(lines)
+			else: 
+				return "<p>There are no questions to answer at this time.</p>"
+		count+=1
+		lines.append("<div style='border:2px solid black;'><input class='form-control' type='radio' name='q_selection' value={id}> Question: {question}\n<p>Status: {status}\n<p>Time submitted: {ts}".format(id=row['id'], question=row['question'], status=row['status'], ts=row['ts']))
 		if row['status'] == 'in-progress': 
 			lines.append("<p>In-Progress Answer: {curr_answer}".format(curr_answer=row['answer']))
 		lines.append("</div>")
@@ -43,14 +49,16 @@ def makeAnswerForm(database, id):
 	curs.execute(statement)
 	row = curs.fetchone()
 	if row: # only one result
-		s = "<p>Question: {q}<br><br>".format(q=row['question'])
+		s = "<fieldset class='form-group'>"
+		s += "<p>Question: {q}<br><br>".format(q=row['question'])
 		s += "<input type=text name='id' value={id} style='display:none'>".format(id=row['id'])
 		s += "<label for='answer'>Answer:</label><br>"
 		if row['status'] == 'in-progress': 
-			s += "<textarea name='answer' cols='40' rows='5'>{ans}</textarea><br>".format(ans=row['answer'])
+			s += "<textarea name='answer' cols='40' rows='5'>{ans}</textarea><br>".format(ans=row['answer'].replace('<br />', '\n'))
 		else: 
-			s += "<textarea name='answer' cols='40' rows='5'></textarea><br>"
-		s += "<input type='submit' name='save' value='Save'><input type='submit' name='publish' value='Publish'>"
+			s += "<textarea class='form-control' name='answer' cols='40' rows='5'></textarea><br>"
+		s += "</fieldset><div class='btn-group' role='group'>"
+		s += "<input class='btn btn-primary' type='submit' name='save' value='Save'><input class='btn btn-primary' type='submit' name='publish' value='Publish'></div>"
 		return s
 	else: 
 		return "ERROR: couldn't find selected question in the database" # shouldn't happen

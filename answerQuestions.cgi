@@ -31,6 +31,7 @@ if __name__ == '__main__':
     if "publish" in form_data or "save" in form_data:
         if "answer" in form_data: # answer is not blank 
             ans = cgi.escape(form_data.getfirst('answer'))
+            ans = ans.replace('\n', '<br />')
             q_id = form_data.getfirst('id')
             if "publish" in form_data:
                 aqs.updateAnswer(DATABASE, q_id, ans, "publish")

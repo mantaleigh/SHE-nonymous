@@ -19,7 +19,9 @@ if __name__ == '__main__':
     form_data = cgi.FieldStorage()
     if 'submit' in form_data:
     	if 'question' in form_data: # if a non-empty question was asked 
-    		sq.addQuestion(DATABASE, cgi.escape(form_data.getfirst('question')))
+            ques = cgi.escape(form_data.getfirst('question'))
+            ques = ques.replace('\n', '<br />')
+            sq.addQuestion(DATABASE, ques)
     	else: 
     		print "Please ask a question before hitting submit."
     
