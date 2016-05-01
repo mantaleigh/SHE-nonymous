@@ -20,6 +20,8 @@ if __name__ == '__main__':
 	if 'logout' in form_data:
 		sessions.logout()
 		msg = "<div class='signin-alert alert alert-success' role='alert'>You have been logged out successfully.</div>"
+	if 'timeout' in form_data:
+		msg = "<div class='signin-alert alert alert-danger' role='alert'>You have been logged out after 6 hours. Please log in again.</div>"
 
 	sessionInfo = sessions.sessionExists()
 	if sessionInfo: 
