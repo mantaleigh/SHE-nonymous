@@ -10,7 +10,7 @@ TODO: Write a description of the file
 '''
 
 import MySQLdb
-import dbconn2
+import dbConnect
 
 USER = 'svoigt'
 
@@ -18,19 +18,8 @@ def addQuestion(database, question):
 	'''
 	Adds the provided question to the questions table in the given database. 
 	'''
-	conn = dbConnect(database)
+	conn = dbConnect.connect(database, USER)
 	curs = conn.cursor(MySQLdb.cursors.DictCursor) # results as Dictionaries
 	statement = "INSERT INTO questions (question, status) VALUES (%s, 'not-started');"
 	curs.execute(statement, question)
 	print "added question: " + question # is this an XSS vulnerability?
-
-
-def dbConnect(database): 
-	''' 
-	Connects to the provided database using my cnf file and returns the connection
-	'''
-	dsn = dbconn2.read_cnf('/students/' + USER + '/.my.cnf')
-	dsn['db'] = database
-	conn = dbconn2.connect(dsn)
-	return conn
-

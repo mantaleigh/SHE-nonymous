@@ -46,7 +46,7 @@
             <li><a href="submitQuestion.cgi">Submit Question</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="answerQuestions.cgi">SHE Login</a></li>
+          	{rightLinks}
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -63,6 +63,9 @@
 
 
 	<div class="container" id="content">
+
+		{message}
+
 		<h1>Answered Questions:</h1>
 		<hr>
 		{allQuestions}
