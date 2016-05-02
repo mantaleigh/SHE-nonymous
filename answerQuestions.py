@@ -53,8 +53,8 @@ def makeAnswerForm(database, id):
 		s += "<p>Question: {q}<br><br>".format(q=row['question'])
 		s += "<input type=text name='id' value={id} style='display:none'>".format(id=row['id'])
 		s += "<label for='answer'>Answer:</label><br>"
-		if row['status'] == 'in-progress': 
-			s += "<textarea name='answer' cols='40' rows='5'>{ans}</textarea><br>".format(ans=row['answer'].replace('<br />', '\n'))
+		if row['status'] == 'in-progress' or row['status'] == 'completed': # if an answer already exists, complete or not 
+			s += "<textarea class='form-control' name='answer' cols='40' rows='5'>{ans}</textarea><br>".format(ans=row['answer'].replace('<br />', '\n'))
 		else: 
 			s += "<textarea class='form-control' name='answer' cols='40' rows='5'></textarea><br>"
 		s += "</fieldset><div class='btn-group' role='group'>"
