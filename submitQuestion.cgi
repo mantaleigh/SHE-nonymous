@@ -40,6 +40,7 @@ if __name__ == '__main__':
             ques = cgi.escape(form_data.getfirst('question'))
             ques = ques.replace('\n', '<br />')
             sq.addQuestion(DATABASE, ques)
+            msg = "<div class='signin-alert alert alert-success' role='alert'>Thank you! Your question has been submitted successfully.</div>"
     	else: 
     		msg = "<div class='signin-alert alert alert-warning' role='alert'>Please ask a question before hitting submit.</div>"
     

@@ -37,7 +37,7 @@ def makeQuestionSelect(database):
 			else: 
 				return "<p>There are no questions to answer at this time.</p>"
 		count+=1
-		lines.append("<div style='border:2px solid black;'><input class='list-group-item form-control' type='radio' name='q_selection' value={id}> Question: {question}\n<p>Status: {status}\n<p>Time submitted: {ts}".format(id=row['id'], question=row['question'], status=row['status'], ts=row['ts']))
+		lines.append("<div class='list-group-item'><input class='form-control' type='radio' name='q_selection' value={id}> <span class='question'>{question}</span><p>Status: {status}<p>Time submitted: {ts}".format(id=row['id'], question=row['question'], status=row['status'], ts=row['ts']))
 		if row['status'] == 'in-progress': 
 			lines.append("<p>In-Progress Answer: {curr_answer}".format(curr_answer=row['answer']))
 		lines.append("</div>")
@@ -50,13 +50,13 @@ def makeAnswerForm(database, id):
 	row = curs.fetchone()
 	if row: # only one result
 		s = "<fieldset class='form-group'>"
-		s += "<p>Question: {q}<br><br>".format(q=row['question'])
+		s += "<p class='question'>{q}</p><br><br>".format(q=row['question'])
 		s += "<input type=text name='id' value={id} style='display:none'>".format(id=row['id'])
 		s += "<label for='answer'>Answer:</label><br>"
 		if row['status'] == 'in-progress' or row['status'] == 'completed': # if an answer already exists, complete or not 
-			s += "<textarea class='form-control' name='answer' cols='40' rows='5'>{ans}</textarea><br>".format(ans=row['answer'].replace('<br />', '\n'))
+			s += "<textarea class='form-control' name='answer' cols='40' rows='10'>{ans}</textarea><br>".format(ans=row['answer'].replace('<br />', '\n'))
 		else: 
-			s += "<textarea class='form-control' name='answer' cols='40' rows='5'></textarea><br>"
+			s += "<textarea class='form-control' name='answer' cols='40' rows='10'></textarea><br>"
 		s += "</fieldset><div class='btn-group' role='group'>"
 		s += "<input class='btn btn-primary' type='submit' name='save' value='Save'><input class='btn btn-primary' type='submit' name='publish' value='Publish'></div>"
 		return s

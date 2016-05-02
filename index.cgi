@@ -9,7 +9,6 @@ import index
 import sessions
 
 
-
 if __name__ == '__main__':
 	print 'Content-type: text/html\n'
 	DATABASE = 'svoigt_db'
