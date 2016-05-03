@@ -23,7 +23,6 @@ if __name__ == '__main__':
 		msg = "<div class='signin-alert alert alert-success' role='alert'>You have been logged out successfully.</div>"
 	if 'timeout' in form_data:
 		msg = "<div class='signin-alert alert alert-danger' role='alert'>You have been logged out after 6 hours. Please log in again.</div>"
-
 	if 'page' in form_data: 
 		page = cgi.escape(form_data.getfirst('page'))
 	
@@ -35,11 +34,13 @@ if __name__ == '__main__':
 
 	next = page + 1
 	prev = page - 1
-
-	if (next - 1) * 10 >= questionCount: 
-		pagerButtons = "<li><a href='index.cgi?page=" + str(prev) + "'>Previous</a></li>"
-	elif page == 1: # show only the next button if the user is at the beginning
+	
+	if questionCount <= 10: 
+		pagerButtons = ""
+	elif page == 1: # show only the next button if the user is at the beginning and there are more than 10 questions
 		pagerButtons = "<li><a href='index.cgi?page=" + str(next) + "'>Next</a></li>"
+	elif page * 10 >= questionCount and page != 1: # only show the previous button if you're on the last page (and there are multiple pages)
+		pagerButtons = "<li><a href='index.cgi?page=" + str(prev) + "'>Previous</a></li>"
 	else: 
 		pagerButtons = "<li><a href='index.cgi?page=" + str(prev) + "'>Previous</a></li><li><a href='index.cgi?page=" + str(next) + "'>Next</a></li>"
 
