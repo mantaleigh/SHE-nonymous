@@ -2,14 +2,9 @@
 
 '''
 Author: Samantha Voigt
-Last Modified: 4/27/16
+
+TODO: Documentation
 '''
-
-
-# QUESTIONS: How to pass around the id between pages & Login sessions (how to make it "safe" but have a session... only last for a session?)
-# set the cookie and set it to expire at time 0 (to be only stored in the browsers memory)
-
-# use a database to store the session ids and delete everything other than a day 
 
 import sys
 

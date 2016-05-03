@@ -2,7 +2,6 @@
 
 '''
 Author: Samantha Voigt
-Last Modified: 5/1/16
 
 Module for creating, deleting, and interacting with sessions having to deal with SHE login.
 

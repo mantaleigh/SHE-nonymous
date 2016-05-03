@@ -2,7 +2,6 @@
 
 '''
 Author: Samantha Voigt
-Last Modified: 4/19/16
 answerQuestions.py
 
 TODO: Write a description of the file
@@ -35,7 +34,7 @@ def makeQuestionSelect(database):
 				lines.append("<input type='submit' class='btn btn-primary' name=questionSubmit value='Answer Selected Question'>")
 				return "\n".join(lines)
 			else: 
-				return "<p>There are no questions to answer at this time.</p>"
+				return "<div class='signin-alert alert alert-info' role='alert'>There are no questions to answer at this time.</div>"
 		count+=1
 		lines.append("<div class='list-group-item'><input class='form-control' type='radio' name='q_selection' value={id}> <span class='question'>{question}</span><p>Status: {status}<p>Time submitted: {ts}".format(id=row['id'], question=row['question'], status=row['status'], ts=row['ts']))
 		if row['status'] == 'in-progress': 
@@ -58,7 +57,11 @@ def makeAnswerForm(database, id):
 		else: 
 			s += "<textarea class='form-control' name='answer' cols='40' rows='10'></textarea><br>"
 		s += "</fieldset><div class='btn-group' role='group'>"
-		s += "<input class='btn btn-primary' type='submit' name='save' value='Save'><input class='btn btn-primary' type='submit' name='publish' value='Publish'></div>"
+		if row['status'] == 'completed': 
+			s += "<input class='btn btn-primary' type='submit' name='save' value='Unpublish & Save'>"
+		else: 
+			s += "<input class='btn btn-primary' type='submit' name='save' value='Save'>"
+		s += "<input class='btn btn-primary' type='submit' name='publish' value='Publish'></div>"
 		return s
 	else: 
 		return "ERROR: couldn't find selected question in the database" # shouldn't happen

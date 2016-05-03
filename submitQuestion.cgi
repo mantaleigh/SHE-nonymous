@@ -2,7 +2,10 @@
 
 '''
 Author: Samantha Voigt
-Last Modified: 4/19/16
+submitQuestion.cgi
+
+TODO: Documentation
+
 '''
 
 import sys

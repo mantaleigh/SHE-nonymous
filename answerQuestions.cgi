@@ -2,11 +2,11 @@
 
 '''
 Author: Samantha Voigt
-Last Modified: 4/19/16
 answerQuestions.cgi
-'''
 
-# TODO: Figure out how to send the "logged out" message to the home page on redirect
+TODO: Documentation
+
+'''
 
 import sys
 

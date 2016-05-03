@@ -2,7 +2,6 @@
 
 '''
 Author: Samantha Voigt
-Last Modified: 4/27/16
 signin.py
 
 TODO: Write a description of the file

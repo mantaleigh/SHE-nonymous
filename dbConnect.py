@@ -1,7 +1,7 @@
 #!/usr/local/bin/python2.7
 
 # Author: Samantha Voigt
-# Module used just for the a method that helps connect to the database
+# Module used just for the method that helps connect to the database
 
 import dbconn2
 
