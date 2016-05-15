@@ -31,7 +31,7 @@ if __name__ == '__main__':
         if not sessions.checkTimestamp(sessid, sess_data): 
             print "Location: index.cgi?timeout=True"
         else: # if the session is still good, the right navbar link should be for the SHE to answer questions
-            links = "<li><a href='answerQuestions.cgi'>Answer Questions</a></li><li><a href='profile.cgi'>Profile</a></li><li><a href='index.cgi?logout=True'>Log Out</a></li>"
+            links = "<li><a href='answerQuestions.cgi'>Answer Questions</a></li><li><a href='profile.cgi?user="+ sess_data['username'] +"'>Profile</a></li><li><a href='index.cgi?logout=True'>Log Out</a></li>"
 
     # if the SHE has logged-out
     if 'logout' in form_data:

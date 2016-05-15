@@ -22,11 +22,14 @@ if __name__ == '__main__':
 	msg = ""
 	form = aqs.makeQuestionSelect(DATABASE)
 	form_data = cgi.FieldStorage()
+	profileLink = 'profile.cgi?user='
 
 	sessionInfo = sessions.sessionExists()
 	if sessionInfo: 
 		sessid = sessionInfo[0]
 		sess_data = sessionInfo[1]
+		username = sess_data['username']
+		profileLink += username
 		if not sessions.checkTimestamp(sessid, sess_data): 
 			print "Location: index.cgi?timeout=True"
 
@@ -63,6 +66,6 @@ if __name__ == '__main__':
 
 	print 'Content-type: text/html\n'
 	tmpl = cgi_utils_sda.file_contents("answerQuestions.html") # template
-	page = tmpl.format(formContent=form, message=msg)
+	page = tmpl.format(profileLink=profileLink,formContent=form, message=msg)
 	print page
 	
