@@ -15,8 +15,9 @@ TODO: Paginate questions and answers
 
 import MySQLdb
 import dbConnect
+import global_settings
 
-USER = 'svoigt'
+USER = global_settings.USER
 
 def getQuestions(database, loggedIn): 
 	'''

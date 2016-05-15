@@ -4,4 +4,4 @@ Project for CS304 - Databases with Web Interfaces @ Wellesley College, Spring 20
 
 ## Demo
 
-[View the current version] (http://cs.wellesley.edu/~svoigt/cgi-bin/project/alpha/SHE-nonymous/).
+[View the current version] (http://cs.wellesley.edu/~svoigt/cgi-bin/project/beta/SHE-nonymous/).

@@ -15,9 +15,10 @@ import cgitb; cgitb.enable()
 import cgi_utils_sda
 import answerQuestions as aqs
 import sessions
+import global_settings
 
 if __name__ == '__main__':
-	DATABASE = 'svoigt_db'   
+	DATABASE = global_settings.DATABASE 
 	msg = ""
 	form = aqs.makeQuestionSelect(DATABASE)
 	form_data = cgi.FieldStorage()

@@ -10,8 +10,9 @@ TODO: Write a description of the file
 
 import MySQLdb
 import dbConnect
+import global_settings
 
-USER = 'svoigt'
+USER = global_settings.USER
 
 def addQuestion(database, question): 
 	'''

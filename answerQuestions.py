@@ -14,8 +14,9 @@ TODO: Count number of unanswered questions and display
 
 import MySQLdb
 import dbConnect
+import global_settings
 
-USER = 'svoigt'
+USER = global_settings.USER
 
 
 def makeQuestionSelect(database): 

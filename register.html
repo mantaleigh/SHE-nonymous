@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="An anonymous question-asking resource for the Wellesley College SHEs.">
+    <meta name="author" content="Samantha Voigt">
+    <!-- <link rel="icon" href=""> -->
+
+    <title>SHE Registration</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="colorscheme.css">
+    <link rel="stylesheet" href="signin.css">
+  </head>
+
+  <body>
+
+    <div class="container">
+      <form class="form-signin" method=post action="register.cgi">
+        {msg}
+        <h2 class="form-signin-heading">Register</h2>
+        <p>For now, you must re-register every semester.
+        <label for="registration-code" class="sr-only">Registration Code</label>
+        <input name="registration-code" class="form-control" placeholder="Registration Code" required autofocus>
+        <label for="username" class="sr-only">Username</label>
+        <input name="username" class="form-control" placeholder="Username" required autofocus>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+        <input class="btn btn-lg btn-primary btn-block" type="submit" name="submit" value="Register">
+      </form>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>

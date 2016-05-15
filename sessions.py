@@ -14,9 +14,9 @@ import os
 import pickle
 import cgi_utils_sda
 import datetime
+import global_settings
 
-VERSION = 'alpha'
-my_sess_dir = '/students/svoigt/public_html/cgi-bin/project/' + VERSION + '/SHE-nonymous/sessions/'
+my_sess_dir = global_settings.my_sess_dir
 
 def sessionExists(): 
 	'''
@@ -34,12 +34,13 @@ def sessionExists():
 	else:
 		return False
 
-def start(): 
+def start(user): 
 	'''
-	Starts a new session by creating a file with the current timestamp in the session data.
+	Starts a new session by creating a file with the current timestamp in the session data and the user's username
 	'''
 	sess_data = cgi_utils_sda.session_start(my_sess_dir)
 	sess_data['timestamp'] = datetime.datetime.now()
+	sess_data['username'] = user
 	cgi_utils_sda.save_session(my_sess_dir,sess_data)
 
 def checkTimestamp(sessid, sess_data): 
@@ -51,7 +52,7 @@ def checkTimestamp(sessid, sess_data):
 	'''
 	now = datetime.datetime.now()
 	delta = now - sess_data['timestamp']
-	if delta > datetime.timedelta(minutes=5):
+	if delta > datetime.timedelta(minutes=1):
 		os.remove(my_sess_dir+sessid)
 		return False
 	else: 
